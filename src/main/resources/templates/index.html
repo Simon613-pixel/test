@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: pink;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: green;
+  color: white;
+}
+</style>
+    <meta charset="utf-8" />
+    <title>Create New Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+</head>
+<body>
+
+ <table id="customers">
+    <thead class="thead-dark">
+       <tr>
+       <th>Student ID</th>
+           <th>Student Name</th>
+           <th>Course</th>
+           <th>Fee</th>
+           <th>Edit</th>
+           <th>Delete</th>
+       </tr>
+       </thead>
+ 
+ 	    <tr th:each="student : ${homeGetAll}">
+		<td th:text="${student.id}">Student ID</td>
+		<td th:text="${student.studentname}">StudentName</td>
+		<td th:text="${student.course}">Course</td>
+		<td th:text="${student.fee}">Fee</td>
+		<td>
+		<a th:href="@{'/homeEdit/' + ${student.id}}">Edit</a>
+		</td>     
+		<td>
+		<a th:href="@{'/homeDeleteById/' + ${student.id}}">Delete</a>
+		</td> 
+	</tr>
+ 
+ </table>
+ 
+ <br />
+ <br />
+ <!-- Pagination  -->
+ <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">First</a></li>
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <li class="page-item"><a class="page-link" href="#">Last</a></li>
+  </ul>
+</nav>
+ 
+ 
+ <form action="/homeSave">
+ 
+	  <br />
+	  <label class="form-label" >Student Name</label>  
+	  <br /> 
+	  <input type="text" name="studentname">
+	  <br />
+	  <label class="form-label" >Course</label>  
+	  <br /> 
+	  <input type="text" name="course">
+	  <br />
+	  <label class="form-label" >Fee</label>  
+	  <br /> 
+	  <input type="text" name="fee">
+	  
+	  <br />
+	  <br />
+	  <button type="submit" class="btn btn-info">Save</button>
+	  
+</form>
+
+<form action ="/homeDeleteAll">
+
+      <br />
+	  <button type="submit" class="btn btn-info">Delete</button>
+	  
+</form>
+
+
+</body>
+</html>
